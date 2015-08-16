@@ -12,13 +12,14 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class SimpleStatsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-
+        /*
         //initialize firebase
         Firebase.setAndroidContext(this);
         Firebase myFirebaseRef = new Firebase("https://torrid-torch-7481.firebaseio.com/");
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 // there was an error
             }
         });
+        */
 
-        setContentView(R.layout.activity_main);
     }
 
     @Override

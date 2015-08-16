@@ -1,27 +1,36 @@
 package com.example.matt.boardgamestats;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import
 
-public class MainActivity extends AppCompatActivity {
+import com.parse.ParseException;
+import com.parse.ParseObject;
+
+
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-
-        Parse.initialize(this, "T3tC3zk8lLXDEXYkYNfpIrEU0aiz0AcAfAjNn4lz", "X3FmqGVs8pHLTj7mYJbOhnkTVtV7g7OPavlg15Oh");
-
-
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
+        final ParseObject testObject = new ParseObject("someObject");
+        testObject.put("some text foo", "maybe this will work");
         testObject.saveInBackground();
+
+        /*
+        try {
+           testObject.save();
+        }catch(ParseException e){
+            e.toString();
+       }*/
+
+
+
+
+
 
     }
 

@@ -27,10 +27,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78dfd5b5-e29e-4709-aa50-56b6983b770d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/matt/boardgamestats/SimpleStatsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/matt/boardgamestats/SimpleStatsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_data.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_data.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/simple_stats_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/simple_stats_activity.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BoardGameStats.iws" />
@@ -2174,7 +2170,13 @@
       <option name="project" value="LOCAL" />
       <updated>1439970166274</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="started the add data activity">
+      <created>1439973226874</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1439973226874</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2234,7 +2236,8 @@
     <MESSAGE value="firebase works like a charm" />
     <MESSAGE value="added in a list adapter, i need to flesh out the gameDataModel next" />
     <MESSAGE value="created the main activity" />
-    <option name="LAST_COMMIT_MESSAGE" value="created the main activity" />
+    <MESSAGE value="started the add data activity" />
+    <option name="LAST_COMMIT_MESSAGE" value="started the add data activity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

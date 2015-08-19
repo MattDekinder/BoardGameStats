@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class SimpleStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_stats_activity);
         vi = (ListView) findViewById(R.id.recent_games_list);
+        Button newGame = (Button) findViewById(R.id.new_game);
+
+
         vi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -29,7 +33,16 @@ public class SimpleStatsActivity extends AppCompatActivity {
                 GameDataModel gdm = (GameDataModel) vi.getItemAtPosition(position);
 
                 Intent i = new Intent(getApplicationContext(), DetailedStatsActivity.class);
-                gdm.setFlag(1);
+                gdm.setFlag(1); //distinguishes the model instance to bring up stats for TODO: probably better to just pass the model to the new activity
+                startActivity(i);
+            }
+        });
+
+        newGame.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AddDataActivity.class);
                 startActivity(i);
             }
         });

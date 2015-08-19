@@ -6,6 +6,7 @@ package com.example.matt.boardgamestats;
 public class GameDataModel {
     protected String name;
     protected String winner;
+    protected int flag = 0;
 
 
     public String getName(){
@@ -13,6 +14,11 @@ public class GameDataModel {
     }
 
     public String getWinner(){
+
         return winner;
+    }
+
+    public void setFlag(int value){
+        this.flag = value;
     }
 }

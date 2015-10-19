@@ -35,10 +35,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78dfd5b5-e29e-4709-aa50-56b6983b770d" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Matt\AndroidStudioProjects\BoardGameStats\app\src\main\java\com\example\matt\boardgamestats\GameInterface.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/matt/boardgamestats/AddDataActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/matt/boardgamestats/AddDataActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/matt/boardgamestats/GameDataModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/matt/boardgamestats/GameDataModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_data.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_data.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BoardGameStats.iws" />
@@ -1919,6 +1915,8 @@
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.STATE" value="left" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.SHOW" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -2161,7 +2159,13 @@
       <option name="project" value="LOCAL" />
       <updated>1445218133901</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="started working on the addDataActivity--this will add played games. I am at a stage now where a playerModel is needed to generate a list of selectable players">
+      <created>1445223345023</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1445223345023</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2223,7 +2227,8 @@
     <MESSAGE value="created the main activity" />
     <MESSAGE value="started the add data activity" />
     <MESSAGE value="added game models for Dominion and Crib" />
-    <option name="LAST_COMMIT_MESSAGE" value="added game models for Dominion and Crib" />
+    <MESSAGE value="started working on the addDataActivity--this will add played games. I am at a stage now where a playerModel is needed to generate a list of selectable players" />
+    <option name="LAST_COMMIT_MESSAGE" value="started working on the addDataActivity--this will add played games. I am at a stage now where a playerModel is needed to generate a list of selectable players" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

@@ -17,4 +17,9 @@ public abstract class GameDataModel {
         return winner;
     }
 
+    public void setFlag(int number)
+    {
+        this.flag =number;
+    }
+
 }

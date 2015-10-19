@@ -25,20 +25,21 @@ public class SimpleStatsActivity extends AppCompatActivity {
         vi = (ListView) findViewById(R.id.recent_games_list);
         Button newGame = (Button) findViewById(R.id.new_game);
 
+            //set a listener for the list of games
+            vi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                long id) {
+                    GameDataModel gdm = (GameDataModel) vi.getItemAtPosition(position);
 
-        vi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                GameDataModel gdm = (GameDataModel) vi.getItemAtPosition(position);
+                    Intent i = new Intent(getApplicationContext(), DetailedStatsActivity.class);
+                    gdm.setFlag(1); //distinguishes the model instance to bring up stats for TODO: probably better to just pass the model to the new activity
+                    startActivity(i);
+                }
+            });
 
-                Intent i = new Intent(getApplicationContext(), DetailedStatsActivity.class);
-                gdm.setFlag(1); //distinguishes the model instance to bring up stats for TODO: probably better to just pass the model to the new activity
-                startActivity(i);
-            }
-        });
-
-        newGame.setOnClickListener(new View.OnClickListener() {
+            //set listener for button
+            newGame.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -46,6 +47,9 @@ public class SimpleStatsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+
 
     }
 
@@ -83,9 +87,9 @@ public class SimpleStatsActivity extends AppCompatActivity {
 }
 
 
-   /*
-        //initialize firebase
-        Firebase.setAndroidContext(this);
+/*
+//initialize firebase
+Firebase.setAndroidContext(this);
         Firebase myFirebaseRef = new Firebase("https://torrid-torch-7481.firebaseio.com/");
         //write data
         myFirebaseRef.child("message2").setValue("Do you still have data? You'll still love Firebase.");
@@ -93,27 +97,28 @@ public class SimpleStatsActivity extends AppCompatActivity {
         //read data back
         myFirebaseRef.child("fxd").addValueEventListener(new ValueEventListener() {
 
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                System.out.println(snapshot.getValue());  //prints "Do you have data? You'll love Firebase."
-            }
+@Override
+public void onDataChange(DataSnapshot snapshot) {
+        System.out.println(snapshot.getValue());  //prints "Do you have data? You'll love Firebase."
+        }
 
-            @Override
-            public void onCancelled(FirebaseError error) {
-            }
+@Override
+public void onCancelled(FirebaseError error) {
+        }
 
         });
 
         //create a user
         myFirebaseRef.createUser("test@fake.com", "thebestpassword", new Firebase.ValueResultHandler<Map<String, Object>>() {
-            @Override
-            public void onSuccess(Map<String, Object> result) {
-                System.out.println("Successfully created user account with uid: " + result.get("uid"));
-            }
+@Override
+public void onSuccess(Map<String, Object> result) {
+        System.out.println("Successfully created user account with uid: " + result.get("uid"));
+        }
 
-            @Override
-            public void onError(FirebaseError firebaseError) {
-                // there was an error
-            }
+@Override
+public void onError(FirebaseError firebaseError) {
+        // there was an error
+        }
         });
-        */
+*/
+

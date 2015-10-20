@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class SimpleStatsActivity extends AppCompatActivity {
 
     ListView vi;
-    ListAdapter adapter;
+    ListAdapterGameModel adapter;
     ArrayList<GameDataModel> dataList;
 
     @Override
@@ -57,7 +57,7 @@ public class SimpleStatsActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        adapter = new ListAdapter(this, dataList);
+        adapter = new ListAdapterGameModel(this, dataList);
         vi.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

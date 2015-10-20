@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Matt on 8/16/2015.
  */
 
-public class ListAdapter extends BaseAdapter {
+public class ListAdapterGameModel extends BaseAdapter {
     ArrayList<GameDataModel> dataModel;
     private LayoutInflater inflater;
 
@@ -60,7 +60,7 @@ public class ListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public ListAdapter(Context context, ArrayList<GameDataModel> gameDataList)
+    public ListAdapterGameModel(Context context, ArrayList<GameDataModel> gameDataList)
     {
 
         super();

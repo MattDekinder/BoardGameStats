@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,10 +22,15 @@ public class AddDataActivity extends AppCompatActivity{
 
     //The strings will be used to find which layout to use in the xml  TODO: find a better way to store this info
     //Don't change these strings.
-    List<String> gameTypes = Arrays.asList("Dominion", "Cribbage");
 
-    ArrayAdapter<String> adapter;
-    ListView vi;
+    List<String> gameTypes = Arrays.asList("Dominion", "Cribbage");
+    ArrayList<PlayerModel> playerList;
+
+
+    ArrayAdapter<String> arrayAdapter;
+    ListAdapterPlayerModel playerListAdapter;
+    ListView gameListView;
+    ListView playerListView;
     ViewFlipper vf;
     TextView title;
     CheckedTextView checkPlayers;
@@ -33,31 +40,56 @@ public class AddDataActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_data);
 
-        vi = (ListView) findViewById(R.id.game_list);
+        //TODO: make a list of players which is stored somewhere besides hardcoded here
+        playerList = new ArrayList<PlayerModel>();
+        PlayerModel player1 = new PlayerModel("Matthew");
+        playerList.add(player1);
+
+
+        gameListView = (ListView) findViewById(R.id.game_list);
         vf = (ViewFlipper) findViewById( R.id.viewFlipper );
         title = (TextView) findViewById(R.id.title);
-        checkPlayers = (CheckedTextView) findViewById(R.id.checkPlayers);
 
-        vi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gameListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 // ListView Clicked item index
-                int itemPosition     = position;
+                int itemPosition = position;
 
                 // ListView Clicked item value
-                String  itemValue    = (String) vi.getItemAtPosition(position);
+                String itemValue = (String) gameListView.getItemAtPosition(position);
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
                         .show();
 
-                title.setText(itemValue); //this is the title of the next screen in this activity
-                //TODO: create a list of player models and a list adapter for them.
+               // title.setText(itemValue); //this is the title of the next screen in this activity
+                //TODO: create a list of player models and a list arrayAdapter for them.
 
                 vf.showNext(); //change to the next view.
+
+            }
+        });
+
+        playerListView = (ListView) findViewById(R.id.player_list);
+        playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                // ListView Clicked item index
+                int itemPosition = position;
+
+                // ListView Clicked item value
+                String itemValue = (String) playerListView.getItemAtPosition(position);
+
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                        .show();
 
             }
         });
@@ -91,12 +123,13 @@ public class AddDataActivity extends AppCompatActivity{
         super.onResume();
 
         //populate the list of selectable games
-        adapter = new ArrayAdapter<String>(this,
+        arrayAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, gameTypes);
 
-        vi.setAdapter(adapter);
+        playerListAdapter = new ListAdapterPlayerModel(this, playerList);
 
-
+        gameListView.setAdapter(arrayAdapter);
+        playerListView.setAdapter(playerListAdapter);
 
     }
 }

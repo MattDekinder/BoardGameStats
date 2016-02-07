@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,7 +55,11 @@ public class ListAdapterPlayerModel extends BaseAdapter {
         TextView text1 = (TextView) convertView.findViewById(R.id.playerName);
         text1.setText(playerDataModel.get(position).getName());
         //text2.setText(Integer.toString(dataModel.get(position).getScore()));
-
+        CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
+        if(playerDataModel.get(position).getIsChecked() == 1)
+            cb.setChecked(true);
+        else
+            cb.setChecked(false);
         return convertView;
     }
 

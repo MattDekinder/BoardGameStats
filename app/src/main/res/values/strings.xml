@@ -6,5 +6,7 @@
     <string name="title_activity_detailed_stats">DetailedStatsActivity</string>
     <string name="title_activity_add_data">AddDataActivity</string>
     <string name="new_game">Add New Game</string>
+    <string name="finish_adding_players">Finished</string>
+    <string name="Save_Game">Save Game</string>
 
 </resources>

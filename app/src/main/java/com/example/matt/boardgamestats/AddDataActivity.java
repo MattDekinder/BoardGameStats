@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,7 +34,6 @@ public class AddDataActivity extends AppCompatActivity{
     ListView playerListView;
     ViewFlipper vf;
     TextView title;
-    CheckedTextView checkPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,21 @@ public class AddDataActivity extends AppCompatActivity{
 
         //TODO: make a list of players which is stored somewhere besides hardcoded here
         playerList = new ArrayList<PlayerModel>();
-        PlayerModel player1 = new PlayerModel("Matthew");
+        final PlayerModel player1 = new PlayerModel("Matthew");
+        PlayerModel player2 = new PlayerModel("Evan");
+        PlayerModel player3 = new PlayerModel("Colin");
+        PlayerModel player4 = new PlayerModel("Derek");
+        PlayerModel player5 = new PlayerModel("Scott");
+        PlayerModel player6 = new PlayerModel("Nick");
+        PlayerModel player7 = new PlayerModel("Joe");
         playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+        playerList.add(player4);
+        playerList.add(player5);
+        playerList.add(player6);
+        playerList.add(player7);
+
 
 
         gameListView = (ListView) findViewById(R.id.game_list);
@@ -60,39 +73,55 @@ public class AddDataActivity extends AppCompatActivity{
 
                 // ListView Clicked item value
                 String itemValue = (String) gameListView.getItemAtPosition(position);
-
+                //TODO: make this an actual game model and assign it to a variable to use in the end part of this activity
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_SHORT)
                         .show();
 
                // title.setText(itemValue); //this is the title of the next screen in this activity
-                //TODO: create a list of player models and a list arrayAdapter for them.
 
                 vf.showNext(); //change to the next view.
+               // gameListView.setOnItemClickListener(null); //deactivate listener-- is this necessary?
 
             }
         });
 
         playerListView = (ListView) findViewById(R.id.player_list);
+
         playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 // ListView Clicked item index
-                int itemPosition = position;
-
-                // ListView Clicked item value
-                String itemValue = (String) playerListView.getItemAtPosition(position);
-
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                PlayerModel player = (PlayerModel) playerListView.getItemAtPosition(position);
+                player.toggleChecked();
+                Toast.makeText(getApplicationContext(),"Name: "+
+                        player.getName()+" Checked: "+ String.valueOf(player.getIsChecked()), Toast.LENGTH_SHORT)
                         .show();
-
+                playerListAdapter.notifyDataSetChanged();
             }
         });
+
+        Button finishPlayers = (Button) findViewById(R.id.finishPlayerSelect);
+        finishPlayers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                vf.showNext();
+
+
+//               for (int i =0; i<playerList.size(); i++){
+//                   PlayerModel pm = playerList.get(i);
+//
+//                   Toast.makeText(getApplicationContext(),"Name: "+
+//                           pm.getName()+" Checked: "+ String.valueOf(pm.getIsChecked()), Toast.LENGTH_SHORT)
+//                           .show();
+//               }
+            }
+        });
+
 
     }
 

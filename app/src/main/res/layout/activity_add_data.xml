@@ -39,6 +39,41 @@
             android:scrollbars="vertical">
         </ListView>
 
+        <Button
+            android:id="@+id/finishPlayerSelect"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/finish_adding_players"
+            android:layout_below="@+id/player_list"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.example.matt.boardgamestats.AddDataActivity">
+
+        <ListView
+            android:id="@+id/player_scores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+        </ListView>
+
+        <Button
+            android:id="@+id/SaveGame"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Save_Game"
+            android:layout_below="@+id/player_scores"
+            />
+
     </RelativeLayout>
 
 </ViewFlipper>

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +27,15 @@ public class AddDataActivity extends AppCompatActivity{
 
     List<String> gameTypes = Arrays.asList("Dominion", "Cribbage");
     ArrayList<PlayerModel> playerList;
+    ArrayList<PlayerModel> scoreList;
 
 
     ArrayAdapter<String> arrayAdapter;
     ListAdapterPlayerModel playerListAdapter;
+    ListAdapterPlayerScore playerScoreAdapter;
     ListView gameListView;
     ListView playerListView;
+    ListView scoreListView;
     ViewFlipper vf;
     TextView title;
 
@@ -39,9 +43,11 @@ public class AddDataActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_data);
+        scoreListView = (ListView) findViewById(R.id.player_scores);
 
         //TODO: make a list of players which is stored somewhere besides hardcoded here
         playerList = new ArrayList<PlayerModel>();
+        scoreList = new ArrayList<PlayerModel>();
         final PlayerModel player1 = new PlayerModel("Matthew");
         PlayerModel player2 = new PlayerModel("Evan");
         PlayerModel player3 = new PlayerModel("Colin");
@@ -57,8 +63,6 @@ public class AddDataActivity extends AppCompatActivity{
         playerList.add(player6);
         playerList.add(player7);
 
-
-
         gameListView = (ListView) findViewById(R.id.game_list);
         vf = (ViewFlipper) findViewById( R.id.viewFlipper );
         title = (TextView) findViewById(R.id.title);
@@ -68,15 +72,12 @@ public class AddDataActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                // ListView Clicked item index
-                int itemPosition = position;
-
                 // ListView Clicked item value
                 String itemValue = (String) gameListView.getItemAtPosition(position);
                 //TODO: make this an actual game model and assign it to a variable to use in the end part of this activity
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_SHORT)
+                        "ListItem : " + itemValue, Toast.LENGTH_SHORT)
                         .show();
 
                // title.setText(itemValue); //this is the title of the next screen in this activity
@@ -97,8 +98,8 @@ public class AddDataActivity extends AppCompatActivity{
                 // ListView Clicked item index
                 PlayerModel player = (PlayerModel) playerListView.getItemAtPosition(position);
                 player.toggleChecked();
-                Toast.makeText(getApplicationContext(),"Name: "+
-                        player.getName()+" Checked: "+ String.valueOf(player.getIsChecked()), Toast.LENGTH_SHORT)
+                Toast.makeText(getApplicationContext(), "Name: " +
+                        player.getName() + " Checked: " + String.valueOf(player.getIsChecked()), Toast.LENGTH_SHORT)
                         .show();
                 playerListAdapter.notifyDataSetChanged();
             }
@@ -108,21 +109,30 @@ public class AddDataActivity extends AppCompatActivity{
         finishPlayers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (int i = 0; i < playerList.size(); i++) {
+                    PlayerModel pm = playerList.get(i);
 
+                    if (pm.getIsChecked() != 0) {
+                        scoreList.add(pm);
+                    }
+                }
+                playerScoreAdapter.notifyDataSetChanged();
                 vf.showNext();
-
-
-//               for (int i =0; i<playerList.size(); i++){
-//                   PlayerModel pm = playerList.get(i);
-//
-//                   Toast.makeText(getApplicationContext(),"Name: "+
-//                           pm.getName()+" Checked: "+ String.valueOf(pm.getIsChecked()), Toast.LENGTH_SHORT)
-//                           .show();
-//               }
             }
+
+
         });
 
 
+        Button saveGame = (Button) findViewById(R.id.SaveGame);
+        finishPlayers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+
+
+        });
     }
 
     @Override
@@ -156,9 +166,11 @@ public class AddDataActivity extends AppCompatActivity{
                 android.R.layout.simple_list_item_1, android.R.id.text1, gameTypes);
 
         playerListAdapter = new ListAdapterPlayerModel(this, playerList);
+        playerScoreAdapter = new ListAdapterPlayerScore(this,scoreList);
 
         gameListView.setAdapter(arrayAdapter);
         playerListView.setAdapter(playerListAdapter);
+        scoreListView.setAdapter(playerScoreAdapter);
 
     }
 }

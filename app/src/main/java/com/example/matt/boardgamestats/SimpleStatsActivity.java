@@ -10,6 +10,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class SimpleStatsActivity extends AppCompatActivity {
@@ -17,11 +24,32 @@ public class SimpleStatsActivity extends AppCompatActivity {
     ListView vi;
     ListAdapterGameModel adapter;
     ArrayList<GameDataModel> dataList;
+    private static final String FILENAME = "file.sav";
+
+    protected GameDataModel loadFromFile() {
+        Gson gson = new Gson();
+        GameDataModel GDM = null;
+
+
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            String line = in.readLine();
+            GDM  = (gson.fromJson(line, GameDataModel.class));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return GDM;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_stats_activity);
+        dataList = new ArrayList<GameDataModel>();
         vi = (ListView) findViewById(R.id.recent_games_list);
         Button newGame = (Button) findViewById(R.id.new_game);
 
@@ -59,6 +87,8 @@ public class SimpleStatsActivity extends AppCompatActivity {
         super.onResume();
         adapter = new ListAdapterGameModel(this, dataList);
         vi.setAdapter(adapter);
+        GameDataModel gdm = loadFromFile();
+        dataList.add(gdm);
         adapter.notifyDataSetChanged();
 
     }

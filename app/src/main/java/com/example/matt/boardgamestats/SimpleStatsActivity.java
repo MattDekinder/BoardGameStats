@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -18,32 +20,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Map;
 
-public class SimpleStatsActivity extends AppCompatActivity {
+public class SimpleStatsActivity extends RootActivity {
 
     ListView vi;
     ListAdapterGameModel adapter;
     ArrayList<GameDataModel> dataList;
-    private static final String FILENAME = "file.sav";
-
-    protected GameDataModel loadFromFile() {
-        Gson gson = new Gson();
-        GameDataModel GDM = null;
 
 
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            String line = in.readLine();
-            GDM  = (gson.fromJson(line, GameDataModel.class));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return GDM;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +42,7 @@ public class SimpleStatsActivity extends AppCompatActivity {
             vi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position,
-                long id) {
+                                        long id) {
                     GameDataModel gdm = (GameDataModel) vi.getItemAtPosition(position);
 
                     Intent i = new Intent(getApplicationContext(), DetailedStatsActivity.class);
@@ -69,12 +54,12 @@ public class SimpleStatsActivity extends AppCompatActivity {
             //set listener for button
             newGame.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), AddDataActivity.class);
-                startActivity(i);
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(), AddDataActivity.class);
+                    startActivity(i);
+                }
+            });
 
 
 
@@ -88,9 +73,10 @@ public class SimpleStatsActivity extends AppCompatActivity {
         adapter = new ListAdapterGameModel(this, dataList);
         vi.setAdapter(adapter);
         GameDataModel gdm = loadFromFile();
-        dataList.add(gdm);
-        adapter.notifyDataSetChanged();
-
+        if (gdm != null){
+            dataList.add(gdm);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -114,41 +100,8 @@ public class SimpleStatsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
 
 
-/*
-//initialize firebase
-Firebase.setAndroidContext(this);
-        Firebase myFirebaseRef = new Firebase("https://torrid-torch-7481.firebaseio.com/");
-        //write data
-        myFirebaseRef.child("message2").setValue("Do you still have data? You'll still love Firebase.");
-
-        //read data back
-        myFirebaseRef.child("fxd").addValueEventListener(new ValueEventListener() {
-
-@Override
-public void onDataChange(DataSnapshot snapshot) {
-        System.out.println(snapshot.getValue());  //prints "Do you have data? You'll love Firebase."
-        }
-
-@Override
-public void onCancelled(FirebaseError error) {
-        }
-
-        });
-
-        //create a user
-        myFirebaseRef.createUser("test@fake.com", "thebestpassword", new Firebase.ValueResultHandler<Map<String, Object>>() {
-@Override
-public void onSuccess(Map<String, Object> result) {
-        System.out.println("Successfully created user account with uid: " + result.get("uid"));
-        }
-
-@Override
-public void onError(FirebaseError firebaseError) {
-        // there was an error
-        }
-        });
-*/
 

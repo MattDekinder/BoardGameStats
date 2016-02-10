@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class AddDataActivity extends AppCompatActivity{
+public class AddDataActivity extends RootActivity{
 
     //The strings will be used to find which layout to use in the xml  TODO: find a better way to store this info
     //Don't change these strings.
@@ -33,8 +33,6 @@ public class AddDataActivity extends AppCompatActivity{
     GameDataModel game;
     ArrayList<PlayerModel> playerList;
     ArrayList<PlayerModel> scoreList;
-
-    private static final String FILENAME = "file.sav";
 
     ArrayAdapter<String> arrayAdapter;
     ListAdapterPlayerModel playerListAdapter;
@@ -46,40 +44,6 @@ public class AddDataActivity extends AppCompatActivity{
     ViewFlipper vf;
     TextView title;
 
-    protected void saveToFile(GameDataModel GDM){
-        Gson gson = new Gson();
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    Context.MODE_PRIVATE);
-            String jsonString = gson.toJson(GDM) + "\n";
-            fos.write(jsonString.getBytes());
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    protected GameDataModel loadFromFile() {
-        Gson gson = new Gson();
-        GameDataModel GDM = null;
-
-
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            String line = in.readLine();
-            GDM  = (gson.fromJson(line, GameDataModel.class));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return GDM;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +138,8 @@ public class AddDataActivity extends AppCompatActivity{
                     }
                 }
                 game.setPlayers(scoreList);
-                saveToFile(game);
+                //saveToFile(game);
+                saveToFirebase(game, "GAME");
                 Log.d("Saving","saving call has happened");
             }
         });
